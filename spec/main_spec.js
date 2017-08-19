@@ -7,37 +7,46 @@ var expect = chai.expect;
 chai.use(sinonChai);
 
 let main = require("../lib/main.js");
-let Lyrics = require("../lib/Lyrics.js");
-let Lyrics_99 = Lyrics.Lyrics_99;
-let Lyrics_2 = Lyrics.Lyrics_2;
-let Lyrics_1 = Lyrics.Lyrics_1;
-let Lyrics_0 = Lyrics.Lyrics_0;
+let loadCodes = require("../lib/loadCodes.js");
 
-describe("printLyrics", function(){
+describe("codeAndDecode", function(){
     //sinon.spy(console, 'log');
 
-    it("when number is 99", function(){
-        let number = 99;
+    it("code : when length is 5", function(){
+        let number ="95713";
         let result = main(number);
-        let expect_string = Lyrics_99();
+        let expect_string =  "|\t|:|::\t:|:|:\t|:::|\t:::||\t::||:\t:|:|:\t|";
         expect(result).to.equal(expect_string);
     });
-    it("when number is 2", function(){
-        let number = 2;
+    it("decode : when length is 5", function(){
+        let number ="|	|:|::	:|:|:	|:::|	:::||	::||:	:|:|:	|";
         let result = main(number);
-        let expect_string = Lyrics_2();
+        let expect_string =  "95713";
         expect(result).to.equal(expect_string);
     });
-    it("when number is 1", function(){
-        let number = 1;
+    it("code : when length is 9", function(){
+        let number ="555551237";
         let result = main(number);
-        let expect_string = Lyrics_1();
+        let expect_string =  "|\t:|:|:\t:|:|:\t:|:|:\t:|:|:\t:|:|:\t:::||\t::|:|\t::||:\t|:::|\t::|:|\t|";
         expect(result).to.equal(expect_string);
     });
-    it("when number is 0", function(){
-        let number = 0;
+    it("decode : when length is 9", function(){
+        let number ="|\t:|:|:\t:|:|:\t:|:|:\t:|:|:\t:|:|:\t:::||\t::|:|\t::||:\t|:::|\t::|:|\t|";
         let result = main(number);
-        let expect_string = Lyrics_0();
+        let expect_string =  "55555-1237";
         expect(result).to.equal(expect_string);
     });
+    it("code : when length is 10", function(){
+        let number ="55555-1237";
+        let result = main(number);
+        let expect_string =  "|\t:|:|:\t:|:|:\t:|:|:\t:|:|:\t:|:|:\t:::||\t::|:|\t::||:\t|:::|\t::|:|\t|";
+        expect(result).to.equal(expect_string);
+    });
+    it("decode : when length is 10", function(){
+        let number ="|\t:|:|:\t:|:|:\t:|:|:\t:|:|:\t:|:|:\t:::||\t::|:|\t::||:\t|:::|\t::|:|\t|";
+        let result = main(number);
+        let expect_string =  "55555-1237";
+        expect(result).to.equal(expect_string);
+    });
+
 });
